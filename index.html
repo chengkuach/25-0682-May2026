@@ -4,398 +4,377 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cheng Real Estates</title>
-<meta name="description" content="Cheng Real Estates — buy, sell and rent residential and commercial property across Kenya. Browse available properties in Nairobi, Mombasa, Naivasha and more.">
- 
+<meta name="description" content="Cheng Real Estates — buy, sell and rent residential and commercial property across Kenya.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --teal:#0B3D4A;--teal-light:#1A5C6E;--sand:#E8D5B0;--terra:#C4622D;
+  --off-white:#F8F5F0;--text:#1A1A1A;--muted:#6B7280;--border:rgba(0,0,0,0.1);
 }
- 
-body{
-    font-family:Arial, sans-serif;
-    background:#f4f6f8;
-    color:#222;
-    line-height:1.6;
-}
- 
-html {
-    scroll-behavior: smooth;
-}
- 
-header{
-    background:#0f4c5c;
-    color:white;
-    padding:20px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:20px;
-    flex-wrap:wrap;
-    text-align:center;
-}
- 
-.logo{
-    width:130px;
-    height:auto;
-    border-radius:50%;
-    border:3px solid white;
-}
- 
-nav{
-    background:#083344;
-    padding:15px;
-    text-align:center;
-}
- 
-nav a{
-    color:white;
-    text-decoration:none;
-    margin:0 12px;
-    font-weight:bold;
-}
- 
-nav a:hover{
-    color:#ffd166;
-}
- 
-.container{
-    width:90%;
-    max-width:1100px;
-    margin:20px auto;
-    background:white;
-    padding:25px;
-    border-radius:10px;
-    box-shadow:0 2px 10px rgba(0,0,0,0.1);
-}
- 
-h2{
-    color:#0f4c5c;
-    margin-top:25px;
-    margin-bottom:10px;
-}
- 
-.hero{
-    text-align:center;
-    margin-bottom:25px;
-}
- 
-.hero img{
-    width:100%;
-    max-height:500px;
-    object-fit:cover;
-    border-radius:10px;
-}
- 
-.gallery{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-    gap:20px;
-}
- 
-.gallery img{
-    width:100%;
-    height:280px;
-    object-fit:cover;
-    border-radius:10px;
-    border:1px solid #ddd;
-}
- 
-figure{
-    text-align:center;
-}
- 
-figcaption{
-    margin-top:8px;
-    font-weight:bold;
-}
- 
-table{
-    width:100%;
-    border-collapse:collapse;
-    margin-top:15px;
-    margin-bottom:20px;
-}
- 
-caption{
-    font-weight:bold;
-    margin-bottom:10px;
-}
- 
-th,td{
-    border:1px solid #ccc;
-    padding:10px;
-}
- 
-th{
-    background:#0f4c5c;
-    color:white;
-}
- 
-audio{
-    width:100%;
-    margin-top:10px;
-}
- 
-iframe{
-    width:100%;
-    height:400px;
-    border:none;
-    border-radius:10px;
-    margin-top:10px;
-}
- 
-footer{
-    background:#083344;
-    color:white;
-    text-align:center;
-    padding:15px;
-    margin-top:30px;
-}
- 
-ul,ol{
-    margin-left:25px;
-    margin-bottom:15px;
-}
+body{font-family:'Inter',sans-serif;background:var(--off-white);color:var(--text);min-height:100vh;width:100%}
+html{scroll-behavior:smooth}
+.cre-header{background:var(--teal);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:72px}
+.cre-logo{display:flex;align-items:center;gap:12px}
+.cre-logo-mark{width:40px;height:40px;border-radius:50%;border:2px solid rgba(232,213,176,0.6);overflow:hidden}
+.cre-logo-mark img{width:100%;height:100%;object-fit:cover}
+.cre-logo-name{font-family:'Cormorant Garant',serif;font-size:20px;font-weight:600;color:var(--sand);letter-spacing:0.02em}
+.cre-nav{display:flex;gap:1.5rem;align-items:center}
+.cre-nav a{color:rgba(255,255,255,0.7);text-decoration:none;font-size:13px;font-weight:500;letter-spacing:0.03em;text-transform:uppercase;transition:color 0.2s}
+.cre-nav a:hover{color:var(--sand)}
+.cre-hero{position:relative;height:520px;overflow:hidden;background:var(--teal)}
+.cre-hero img{width:100%;height:100%;object-fit:cover;opacity:0.55}
+.cre-hero-content{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:3rem 2.5rem;max-width:580px}
+.cre-eyebrow{font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--sand);margin-bottom:1rem;opacity:0.9}
+.cre-hero-title{font-family:'Cormorant Garant',serif;font-size:52px;font-weight:600;line-height:1.1;color:white;margin-bottom:1.25rem}
+.cre-hero-sub{font-size:15px;color:rgba(255,255,255,0.75);line-height:1.6;margin-bottom:2rem;max-width:420px}
+.cre-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;font-size:13px;font-weight:500;letter-spacing:0.04em;text-transform:uppercase;cursor:pointer;transition:all 0.2s;border:none}
+.cre-btn-primary{background:var(--terra);color:white;border-radius:2px}
+.cre-btn-primary:hover{background:#b0561f}
+.cre-btn-outline{background:transparent;color:var(--sand);border:1px solid rgba(232,213,176,0.5);border-radius:2px;margin-left:12px}
+.cre-btn-outline:hover{background:rgba(232,213,176,0.1)}
+.cre-stats-bar{background:var(--teal-light);display:flex;justify-content:center}
+.cre-stat{padding:18px 40px;text-align:center;border-right:1px solid rgba(255,255,255,0.1)}
+.cre-stat:last-child{border-right:none}
+.cre-stat-num{font-family:'Cormorant Garant',serif;font-size:28px;font-weight:600;color:var(--sand)}
+.cre-stat-label{font-size:11px;color:rgba(255,255,255,0.55);letter-spacing:0.08em;text-transform:uppercase;margin-top:2px}
+.cre-section{padding:3.5rem 2.5rem}
+.cre-section-label{font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--terra);margin-bottom:0.75rem}
+.cre-section-title{font-family:'Cormorant Garant',serif;font-size:36px;font-weight:600;color:var(--teal);line-height:1.15;margin-bottom:1rem}
+.cre-section-desc{font-size:15px;color:var(--muted);line-height:1.7;max-width:520px}
+.cre-properties{background:white}
+.cre-props-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:2rem;flex-wrap:wrap;gap:1rem}
+.cre-filter-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:1rem}
+.cre-filter{padding:6px 16px;font-size:12px;font-weight:500;letter-spacing:0.04em;text-transform:uppercase;cursor:pointer;border-radius:2px;transition:all 0.2s;border:1px solid var(--border);background:transparent;color:var(--muted)}
+.cre-filter.active{background:var(--teal);color:white;border-color:var(--teal)}
+.cre-filter:not(.active):hover{border-color:var(--teal);color:var(--teal)}
+.cre-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
+.cre-card{background:white;border:1px solid var(--border);border-radius:4px;overflow:hidden;transition:transform 0.2s,box-shadow 0.2s;cursor:pointer}
+.cre-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,0.1)}
+.cre-card-img{height:200px;overflow:hidden;position:relative}
+.cre-card-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.4s}
+.cre-card:hover .cre-card-img img{transform:scale(1.04)}
+.cre-status{position:absolute;top:12px;left:12px;padding:4px 10px;font-size:10px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;border-radius:2px}
+.cre-status-available{background:#0B3D4A;color:var(--sand)}
+.cre-card-body{padding:1.25rem}
+.cre-card-type{font-size:10px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--terra);margin-bottom:6px}
+.cre-card-title{font-family:'Cormorant Garant',serif;font-size:20px;font-weight:600;color:var(--teal);margin-bottom:4px;line-height:1.2}
+.cre-card-loc{font-size:13px;color:var(--muted);display:flex;align-items:center;gap:4px;margin-bottom:12px}
+.cre-card-footer{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border);padding-top:12px}
+.cre-price{font-family:'Cormorant Garant',serif;font-size:22px;font-weight:600;color:var(--teal)}
+.cre-price-sub{font-size:11px;color:var(--muted);margin-top:1px}
+.cre-card-cta{font-size:12px;font-weight:500;color:var(--terra);letter-spacing:0.04em;text-transform:uppercase;text-decoration:none;display:flex;align-items:center;gap:4px;cursor:pointer}
+.cre-about{background:var(--off-white);display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.cre-about-img{height:400px;border-radius:4px;overflow:hidden;position:relative}
+.cre-about-img img{width:100%;height:100%;object-fit:cover}
+.cre-about-accent{position:absolute;bottom:24px;right:-20px;background:var(--terra);padding:20px 24px;border-radius:2px}
+.cre-about-accent-num{font-family:'Cormorant Garant',serif;font-size:36px;font-weight:600;color:white}
+.cre-about-accent-txt{font-size:11px;color:rgba(255,255,255,0.8);text-transform:uppercase;letter-spacing:0.08em}
+.cre-services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem;margin-top:2rem}
+.cre-service-card{background:white;border:1px solid var(--border);padding:1.75rem 1.5rem;border-radius:4px}
+.cre-service-icon{width:44px;height:44px;background:rgba(11,61,74,0.07);border-radius:4px;display:flex;align-items:center;justify-content:center;margin-bottom:1rem;color:var(--teal);font-size:22px}
+.cre-service-title{font-family:'Cormorant Garant',serif;font-size:18px;font-weight:600;color:var(--teal);margin-bottom:6px}
+.cre-service-desc{font-size:13px;color:var(--muted);line-height:1.6}
+.cre-process{background:var(--teal);padding:3.5rem 2.5rem}
+.cre-process-title{font-family:'Cormorant Garant',serif;font-size:36px;font-weight:600;color:white;margin-bottom:0.5rem}
+.cre-process-sub{color:rgba(255,255,255,0.6);font-size:14px;margin-bottom:2.5rem}
+.cre-steps{display:flex;gap:0;flex-wrap:wrap}
+.cre-step{flex:1;min-width:160px;padding:1.5rem;position:relative}
+.cre-step:not(:last-child)::after{content:'';position:absolute;right:0;top:50%;width:1px;height:40%;background:rgba(255,255,255,0.15);transform:translateY(-50%)}
+.cre-step-num{font-family:'Cormorant Garant',serif;font-size:44px;font-weight:600;color:rgba(232,213,176,0.25);line-height:1;margin-bottom:8px}
+.cre-step-title{font-size:13px;font-weight:500;color:white;margin-bottom:4px}
+.cre-step-desc{font-size:12px;color:rgba(255,255,255,0.5);line-height:1.5}
+.cre-contact{background:white;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.cre-contact-info{display:flex;flex-direction:column;gap:1.5rem;margin-top:1.5rem}
+.cre-contact-item{display:flex;gap:1rem;align-items:flex-start}
+.cre-contact-icon{width:40px;height:40px;background:rgba(11,61,74,0.07);border-radius:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--teal);font-size:18px}
+.cre-contact-label{font-size:12px;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:3px}
+.cre-contact-val{font-size:15px;color:var(--text)}
+.cre-contact-val a{color:var(--teal);text-decoration:none}
+.cre-contact-val a:hover{text-decoration:underline}
+.cre-form{display:flex;flex-direction:column;gap:1rem;margin-top:1.5rem}
+.cre-form input,.cre-form select,.cre-form textarea{padding:12px 14px;border:1px solid var(--border);border-radius:2px;font-family:'Inter',sans-serif;font-size:14px;background:var(--off-white);color:var(--text);outline:none;transition:border-color 0.2s;width:100%}
+.cre-form input:focus,.cre-form select:focus,.cre-form textarea:focus{border-color:var(--teal)}
+.cre-form textarea{resize:vertical;min-height:100px}
+.cre-form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.cre-submit{background:var(--terra);color:white;padding:13px 28px;border:none;border-radius:2px;font-size:13px;font-weight:500;letter-spacing:0.05em;text-transform:uppercase;cursor:pointer;transition:background 0.2s;align-self:flex-start}
+.cre-submit:hover{background:#b0561f}
+.cre-footer{background:#06252E;padding:2rem 2.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.cre-footer-name{font-family:'Cormorant Garant',serif;font-size:18px;color:var(--sand)}
+.cre-footer-copy{font-size:12px;color:rgba(255,255,255,0.35)}
+.cre-divider{height:1px;background:var(--border)}
 </style>
 </head>
- 
 <body>
  
-<header>
-    <a href="#home">
-        <!-- Logo: Cytonn Real Estate Nairobi building (Unsplash / Cytonn Photography) -->
-        <img src="https://images.unsplash.com/photo-1565953554309-d181306db7d5?w=200&h=200&fit=crop" alt="Cheng Real Estates Logo" class="logo">
-    </a>
- 
-    <div>
-        <h1 id="home">Cheng Real Estates</h1>
-        <p>Your Trusted Partner in Buying, Selling and Renting Property</p>
+<header class="cre-header">
+  <div class="cre-logo">
+    <div class="cre-logo-mark">
+      <img src="https://images.unsplash.com/photo-1565953554309-d181306db7d5?w=80&h=80&fit=crop" alt="Cheng Real Estates">
     </div>
-</header>
- 
-<nav>
+    <span class="cre-logo-name">Cheng Real Estates</span>
+  </div>
+  <nav class="cre-nav">
     <a href="#about">About</a>
     <a href="#services">Services</a>
     <a href="#properties">Properties</a>
-    <a href="#gallery">Gallery</a>
-    <a href="#media">Media</a>
     <a href="#contact">Contact</a>
-</nav>
+  </nav>
+</header>
  
-<div class="container">
- 
-<section class="hero">
-    <h2>Featured Property</h2>
-    <a href="#gallery">
-        <!-- Hero: Nairobi apartment building with palm trees — Shalom House, Nairobi (Unsplash / Kevin Menya) -->
-        <img src="https://images.unsplash.com/photo-1651151084802-867d6a55dd25?w=1200&h=600&fit=crop"
-             fetchpriority="high"
-             alt="Featured Cheng Real Estates Property in Nairobi, Kenya">
-    </a>
-</section>
- 
-<section id="about">
-    <h2>About Us</h2>
-    <p>
-        Cheng Real Estates is committed to helping clients find
-        quality residential and commercial properties throughout Kenya.
-        We provide professional real estate services built on trust,
-        transparency and customer satisfaction.
-    </p>
-</section>
- 
-<section id="services">
- 
-    <h2>Our Services</h2>
- 
-    <h3>Services Offered</h3>
-    <ul>
-        <li>Property Sales</li>
-        <li>Property Rentals</li>
-        <li>Property Management</li>
-        <li>Real Estate Investment Advice</li>
-    </ul>
- 
-    <h3>Property Buying Process</h3>
-    <ol>
-        <li>Browse Available Properties</li>
-        <li>Book a Property Viewing</li>
-        <li>Negotiate the Purchase Price</li>
-        <li>Sign Legal Agreements</li>
-        <li>Transfer Ownership</li>
-    </ol>
- 
-    <h3>Property Categories</h3>
-    <ul>
-        <li>Residential
-            <ul>
-                <li>Villas</li>
-                <li>Apartments</li>
-                <li>Townhouses</li>
-            </ul>
-        </li>
-        <li>Commercial
-            <ul>
-                <li>Office Space</li>
-                <li>Retail Shops</li>
-            </ul>
-        </li>
-    </ul>
- 
-</section>
- 
-<section id="properties">
- 
-<h2>Available Properties</h2>
- 
-<table>
-<caption>Cheng Real Estates Property Catalogue</caption>
-<thead>
-<tr>
-<th scope="col">Property</th>
-<th scope="col">Location</th>
-<th scope="col">Price (KES)</th>
-<th scope="col">Status</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>5 Bedroom Mansion</td>
-<td>Runda</td>
-<td>85,000,000</td>
-<td>Available</td>
-</tr>
-<tr>
-<td>2 Bedroom Apartment</td>
-<td>Kilimani</td>
-<td>9,500,000</td>
-<td>Available</td>
-</tr>
-<tr>
-<td>Commercial Plot</td>
-<td>Mombasa Road</td>
-<td>25,000,000</td>
-<td>Available</td>
-</tr>
-<tr>
-<td>Holiday Cottage</td>
-<td>Naivasha</td>
-<td>14,500,000</td>
-<td>Available</td>
-</tr>
-<tr>
-<td>4 Bedroom Maisonette</td>
-<td>Kitengela</td>
-<td>12,000,000</td>
-<td>Available</td>
-</tr>
-</tbody>
-</table>
- 
-</section>
- 
-<section id="gallery">
- 
-<h2>Property Gallery</h2>
- 
-<div class="gallery">
- 
-<figure>
-<!-- The Alma residential development, Nairobi — Cytonn Real Estate (Unsplash / Cytonn Photography) -->
-<img src="https://images.unsplash.com/photo-1565953554309-d181306db7d5?w=600&h=400&fit=crop"
-loading="lazy"
-alt="The Alma residential development, Nairobi">
-<figcaption>Modern Property Development</figcaption>
-</figure>
- 
-<figure>
-<!-- Nairobi apartment building with palm trees — Shalom House, Nairobi (Unsplash / Kevin Menya) -->
-<img src="https://images.unsplash.com/photo-1651151084802-867d6a55dd25?w=600&h=400&fit=crop"
-loading="lazy"
-alt="Luxury apartment building, Nairobi">
-<figcaption>Luxury Residential Property</figcaption>
-</figure>
- 
-<figure>
-<!-- Nairobi building with trees — (Unsplash / Zac Wolff) -->
-<img src="https://images.unsplash.com/photo-1585523658894-cc78fc2c8f67?w=600&h=400&fit=crop"
-loading="lazy"
-alt="Nairobi property surrounded by greenery">
-<figcaption>Premium Living Spaces</figcaption>
-</figure>
- 
-<figure>
-<!-- Nairobi white and blue concrete building — (Unsplash / Joecalih) -->
-<img src="https://images.unsplash.com/photo-1630880150559-25a87a27d81d?w=600&h=400&fit=crop"
-loading="lazy"
-alt="Modern commercial building, Nairobi">
-<figcaption>Quality Housing Investment</figcaption>
-</figure>
- 
+<div class="cre-hero">
+  <img src="https://images.unsplash.com/photo-1651151084802-867d6a55dd25?w=1200&h=600&fit=crop" alt="Luxury property in Nairobi">
+  <div class="cre-hero-content">
+    <div class="cre-eyebrow">Nairobi · Mombasa · Naivasha</div>
+    <h1 class="cre-hero-title">Find Your Place<br><em>in Kenya</em></h1>
+    <p class="cre-hero-sub">Residential and commercial property across Kenya's most sought-after locations. Trusted guidance at every step.</p>
+    <div>
+      <button class="cre-btn cre-btn-primary" onclick="document.getElementById('properties').scrollIntoView({behavior:'smooth'})">
+        <i class="ti ti-building" aria-hidden="true"></i> Browse Properties
+      </button>
+      <button class="cre-btn cre-btn-outline" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+        Contact Us
+      </button>
+    </div>
+  </div>
 </div>
  
-</section>
- 
-<section id="media">
- 
-<h2>Company Introduction Audio</h2>
- 
-<!-- "Real Estate" by Scott Holmes Music — free for non-commercial use (CC BY-NC) -->
-<!-- Source: https://scottholmesmusic.com/tracks/real-estate/ -->
-<audio controls onerror="this.style.display='none'; document.getElementById('audio-fallback').style.display='block'">
-    <source src="https://scottholmesmusic.com/wp-content/uploads/edd/2021/09/Real-Estate.mp3" type="audio/mpeg">
-    Your browser does not support audio.
-</audio>
-<p id="audio-fallback" style="display:none; margin-top:8px;">
-    <a href="https://scottholmesmusic.com/wp-content/uploads/edd/2021/09/Real-Estate.mp3">Download audio</a>
-</p>
-<p style="font-size:12px; color:#888; margin-top:6px;">
-    Music: "Real Estate" by <a href="https://scottholmesmusic.com" target="_blank">Scott Holmes Music</a> — CC BY-NC licence
-</p>
- 
-<h2 style="margin-top:20px;">Featured Video</h2>
- 
-<iframe
-src="https://www.youtube.com/embed/bQXuobswD6s"
-title="Real Estate Video"
-loading="lazy"
-allowfullscreen>
-</iframe>
- 
-<h2 style="margin-top:20px;">Our Location</h2>
- 
-<iframe
-src="https://maps.google.com/maps?q=Quincy+Mall+Nairobi+Kenya&output=embed"
-title="Cheng Real Estates location — Quincy Mall, Nairobi, Kenya"
-loading="lazy">
-</iframe>
- 
-</section>
- 
-<section id="contact">
- 
-<h2>Contact Us</h2>
- 
-<p>Email: info@chengrealestates.com</p>
-<p>Phone: <a href="tel:+254794693395">+254 794 693 395</a></p>
- 
-<p>
-Visit our partner website:
-<a href="https://www.property24.co.ke" target="_blank">
-Property24 Kenya
-</a>
-</p>
- 
-</section>
- 
+<div class="cre-stats-bar">
+  <div class="cre-stat"><div class="cre-stat-num">5+</div><div class="cre-stat-label">Active Listings</div></div>
+  <div class="cre-stat"><div class="cre-stat-num">4</div><div class="cre-stat-label">Locations</div></div>
+  <div class="cre-stat"><div class="cre-stat-num">100%</div><div class="cre-stat-label">Client Focus</div></div>
+  <div class="cre-stat"><div class="cre-stat-num">KES 9.5M+</div><div class="cre-stat-label">Starting From</div></div>
 </div>
  
-<footer>
-<p>&copy; 2026 Cheng Real Estates. All Rights Reserved.</p>
+<section id="properties" class="cre-section cre-properties">
+  <div class="cre-props-header">
+    <div>
+      <div class="cre-section-label">Listings</div>
+      <h2 class="cre-section-title">Available Properties</h2>
+    </div>
+    <div>
+      <div class="cre-filter-row">
+        <button class="cre-filter active" onclick="filterProps(this,'all')">All</button>
+        <button class="cre-filter" onclick="filterProps(this,'residential')">Residential</button>
+        <button class="cre-filter" onclick="filterProps(this,'commercial')">Commercial</button>
+      </div>
+    </div>
+  </div>
+  <div class="cre-grid" id="cre-prop-grid">
+    <div class="cre-card" data-cat="residential">
+      <div class="cre-card-img">
+        <img src="https://images.unsplash.com/photo-1565953554309-d181306db7d5?w=600&h=300&fit=crop" loading="lazy" alt="5 Bedroom Mansion in Runda">
+        <div class="cre-status cre-status-available">Available</div>
+      </div>
+      <div class="cre-card-body">
+        <div class="cre-card-type">Residential · Villa</div>
+        <div class="cre-card-title">5 Bedroom Mansion</div>
+        <div class="cre-card-loc"><i class="ti ti-map-pin" aria-hidden="true" style="font-size:13px;color:var(--terra)"></i> Runda, Nairobi</div>
+        <div class="cre-card-footer">
+          <div><div class="cre-price">KES 85M</div><div class="cre-price-sub">For sale</div></div>
+          <a class="cre-card-cta" href="mailto:info@chengrealestates.com?subject=Enquiry: 5 Bedroom Mansion, Runda">Enquire <i class="ti ti-arrow-right" aria-hidden="true" style="font-size:12px"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="cre-card" data-cat="residential">
+      <div class="cre-card-img">
+        <img src="https://images.unsplash.com/photo-1651151084802-867d6a55dd25?w=600&h=300&fit=crop" loading="lazy" alt="2 Bedroom Apartment in Kilimani">
+        <div class="cre-status cre-status-available">Available</div>
+      </div>
+      <div class="cre-card-body">
+        <div class="cre-card-type">Residential · Apartment</div>
+        <div class="cre-card-title">2 Bedroom Apartment</div>
+        <div class="cre-card-loc"><i class="ti ti-map-pin" aria-hidden="true" style="font-size:13px;color:var(--terra)"></i> Kilimani, Nairobi</div>
+        <div class="cre-card-footer">
+          <div><div class="cre-price">KES 9.5M</div><div class="cre-price-sub">For sale</div></div>
+          <a class="cre-card-cta" href="mailto:info@chengrealestates.com?subject=Enquiry: 2 Bedroom Apartment, Kilimani">Enquire <i class="ti ti-arrow-right" aria-hidden="true" style="font-size:12px"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="cre-card" data-cat="commercial">
+      <div class="cre-card-img">
+        <img src="https://images.unsplash.com/photo-1630880150559-25a87a27d81d?w=600&h=300&fit=crop" loading="lazy" alt="Commercial Plot on Mombasa Road">
+        <div class="cre-status cre-status-available">Available</div>
+      </div>
+      <div class="cre-card-body">
+        <div class="cre-card-type">Commercial · Plot</div>
+        <div class="cre-card-title">Commercial Plot</div>
+        <div class="cre-card-loc"><i class="ti ti-map-pin" aria-hidden="true" style="font-size:13px;color:var(--terra)"></i> Mombasa Road, Nairobi</div>
+        <div class="cre-card-footer">
+          <div><div class="cre-price">KES 25M</div><div class="cre-price-sub">For sale</div></div>
+          <a class="cre-card-cta" href="mailto:info@chengrealestates.com?subject=Enquiry: Commercial Plot, Mombasa Road">Enquire <i class="ti ti-arrow-right" aria-hidden="true" style="font-size:12px"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="cre-card" data-cat="residential">
+      <div class="cre-card-img">
+        <img src="https://images.unsplash.com/photo-1585523658894-cc78fc2c8f67?w=600&h=300&fit=crop" loading="lazy" alt="Holiday Cottage in Naivasha">
+        <div class="cre-status cre-status-available">Available</div>
+      </div>
+      <div class="cre-card-body">
+        <div class="cre-card-type">Residential · Cottage</div>
+        <div class="cre-card-title">Holiday Cottage</div>
+        <div class="cre-card-loc"><i class="ti ti-map-pin" aria-hidden="true" style="font-size:13px;color:var(--terra)"></i> Naivasha</div>
+        <div class="cre-card-footer">
+          <div><div class="cre-price">KES 14.5M</div><div class="cre-price-sub">For sale</div></div>
+          <a class="cre-card-cta" href="mailto:info@chengrealestates.com?subject=Enquiry: Holiday Cottage, Naivasha">Enquire <i class="ti ti-arrow-right" aria-hidden="true" style="font-size:12px"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="cre-card" data-cat="residential">
+      <div class="cre-card-img">
+        <img src="https://images.unsplash.com/photo-1565953554309-d181306db7d5?w=600&h=300&fit=crop" loading="lazy" alt="4 Bedroom Maisonette in Kitengela">
+        <div class="cre-status cre-status-available">Available</div>
+      </div>
+      <div class="cre-card-body">
+        <div class="cre-card-type">Residential · Maisonette</div>
+        <div class="cre-card-title">4 Bedroom Maisonette</div>
+        <div class="cre-card-loc"><i class="ti ti-map-pin" aria-hidden="true" style="font-size:13px;color:var(--terra)"></i> Kitengela</div>
+        <div class="cre-card-footer">
+          <div><div class="cre-price">KES 12M</div><div class="cre-price-sub">For sale</div></div>
+          <a class="cre-card-cta" href="mailto:info@chengrealestates.com?subject=Enquiry: 4 Bedroom Maisonette, Kitengela">Enquire <i class="ti ti-arrow-right" aria-hidden="true" style="font-size:12px"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<div class="cre-divider"></div>
+ 
+<section id="about" class="cre-section cre-about">
+  <div class="cre-about-img">
+    <img src="https://images.unsplash.com/photo-1630880150559-25a87a27d81d?w=600&h=500&fit=crop" alt="Nairobi property development">
+    <div class="cre-about-accent">
+      <div class="cre-about-accent-num">2026</div>
+      <div class="cre-about-accent-txt">Est. Nairobi</div>
+    </div>
+  </div>
+  <div>
+    <div class="cre-section-label">Our Story</div>
+    <h2 class="cre-section-title">Built on Trust,<br>Rooted in Kenya</h2>
+    <p class="cre-section-desc">Cheng Real Estates helps clients find quality residential and commercial properties throughout Kenya. We provide professional real estate services built on transparency and genuine customer care — from first viewing to final transfer.</p>
+    <div style="display:flex;gap:2rem;margin-top:2rem;flex-wrap:wrap">
+      <div>
+        <div style="font-family:'Cormorant Garant',serif;font-size:32px;font-weight:600;color:var(--teal)">5+</div>
+        <div style="font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em">Active listings</div>
+      </div>
+      <div>
+        <div style="font-family:'Cormorant Garant',serif;font-size:32px;font-weight:600;color:var(--teal)">4</div>
+        <div style="font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em">Locations</div>
+      </div>
+      <div>
+        <div style="font-family:'Cormorant Garant',serif;font-size:32px;font-weight:600;color:var(--teal)">100%</div>
+        <div style="font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em">Dedicated service</div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<section id="services" class="cre-section" style="background:var(--off-white)">
+  <div class="cre-section-label">What We Offer</div>
+  <h2 class="cre-section-title">Our Services</h2>
+  <div class="cre-services-grid">
+    <div class="cre-service-card">
+      <div class="cre-service-icon"><i class="ti ti-home-dollar" aria-hidden="true"></i></div>
+      <div class="cre-service-title">Property Sales</div>
+      <div class="cre-service-desc">Buy or sell residential and commercial properties with expert guidance throughout the process.</div>
+    </div>
+    <div class="cre-service-card">
+      <div class="cre-service-icon"><i class="ti ti-key" aria-hidden="true"></i></div>
+      <div class="cre-service-title">Property Rentals</div>
+      <div class="cre-service-desc">Find the right rental property — or secure reliable tenants for yours. We handle the matching.</div>
+    </div>
+    <div class="cre-service-card">
+      <div class="cre-service-icon"><i class="ti ti-building" aria-hidden="true"></i></div>
+      <div class="cre-service-title">Property Management</div>
+      <div class="cre-service-desc">Full management services so your investment runs smoothly while you focus on what matters.</div>
+    </div>
+    <div class="cre-service-card">
+      <div class="cre-service-icon"><i class="ti ti-chart-line" aria-hidden="true"></i></div>
+      <div class="cre-service-title">Investment Advice</div>
+      <div class="cre-service-desc">Strategic insight on Kenya's real estate market to help you make informed investment decisions.</div>
+    </div>
+  </div>
+</section>
+ 
+<section class="cre-process">
+  <div class="cre-section-label" style="color:var(--sand)">How it works</div>
+  <div class="cre-process-title">Buying Made Simple</div>
+  <div class="cre-process-sub">Five clear steps from browse to keys in hand</div>
+  <div class="cre-steps">
+    <div class="cre-step"><div class="cre-step-num">01</div><div class="cre-step-title">Browse Listings</div><div class="cre-step-desc">Explore our property catalogue online or visit our office</div></div>
+    <div class="cre-step"><div class="cre-step-num">02</div><div class="cre-step-title">Book a Viewing</div><div class="cre-step-desc">Schedule an in-person viewing at your convenience</div></div>
+    <div class="cre-step"><div class="cre-step-num">03</div><div class="cre-step-title">Negotiate Price</div><div class="cre-step-desc">Our agents guide you to a fair deal for both parties</div></div>
+    <div class="cre-step"><div class="cre-step-num">04</div><div class="cre-step-title">Sign Agreements</div><div class="cre-step-desc">Legal review and documentation handled professionally</div></div>
+    <div class="cre-step"><div class="cre-step-num">05</div><div class="cre-step-title">Transfer Ownership</div><div class="cre-step-desc">Complete handover with all documentation in order</div></div>
+  </div>
+</section>
+ 
+<section id="contact" class="cre-section cre-contact">
+  <div>
+    <div class="cre-section-label">Get in Touch</div>
+    <h2 class="cre-section-title">Ready to Find Your Property?</h2>
+    <p class="cre-section-desc">Our agents are ready to help you navigate the Kenyan property market with confidence.</p>
+    <div class="cre-contact-info">
+      <div class="cre-contact-item">
+        <div class="cre-contact-icon"><i class="ti ti-phone" aria-hidden="true"></i></div>
+        <div><div class="cre-contact-label">Phone</div><div class="cre-contact-val"><a href="tel:+254794693395">+254 794 693 395</a></div></div>
+      </div>
+      <div class="cre-contact-item">
+        <div class="cre-contact-icon"><i class="ti ti-mail" aria-hidden="true"></i></div>
+        <div><div class="cre-contact-label">Email</div><div class="cre-contact-val"><a href="mailto:info@chengrealestates.com">info@chengrealestates.com</a></div></div>
+      </div>
+      <div class="cre-contact-item">
+        <div class="cre-contact-icon"><i class="ti ti-map-pin" aria-hidden="true"></i></div>
+        <div><div class="cre-contact-label">Office</div><div class="cre-contact-val">Quincy Mall, Nairobi, Kenya</div></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="cre-section-label">Send a Message</div>
+    <h3 style="font-family:'Cormorant Garant',serif;font-size:24px;font-weight:600;color:var(--teal);margin-bottom:0.25rem">We'll be in touch</h3>
+    <form class="cre-form" onsubmit="handleSubmit(event)">
+      <div class="cre-form-row">
+        <input type="text" placeholder="Your name" required>
+        <input type="email" placeholder="Email address" required>
+      </div>
+      <select required>
+        <option value="" disabled selected>I'm interested in…</option>
+        <option>Buying a property</option>
+        <option>Renting a property</option>
+        <option>Selling my property</option>
+        <option>Investment advice</option>
+      </select>
+      <textarea placeholder="Tell us about what you're looking for…"></textarea>
+      <button type="submit" class="cre-submit">Send Enquiry</button>
+    </form>
+  </div>
+</section>
+ 
+<footer class="cre-footer">
+  <div class="cre-footer-name">Cheng Real Estates</div>
+  <div style="display:flex;gap:1.5rem">
+    <a href="https://www.property24.co.ke" target="_blank" style="font-size:12px;color:rgba(255,255,255,0.45);text-decoration:none">Property24 Kenya</a>
+  </div>
+  <div class="cre-footer-copy">&copy; 2026 Cheng Real Estates. All rights reserved.</div>
 </footer>
+ 
+<script>
+function filterProps(btn, cat) {
+  document.querySelectorAll('.cre-filter').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.cre-card').forEach(card => {
+    card.style.display = (cat === 'all' || card.dataset.cat === cat) ? '' : 'none';
+  });
+}
+function handleSubmit(e) {
+  e.preventDefault();
+  alert('Thank you for your enquiry! We will be in touch shortly.');
+  e.target.reset();
+}
+</script>
  
 </body>
 </html>
- 
