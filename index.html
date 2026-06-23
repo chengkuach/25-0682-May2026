@@ -1,659 +1,150 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cheng Real Estates</title>
-<meta name="description" content="Cheng Real Estates — buy, sell and rent residential and commercial property across Kenya.">
+/* ═══════════════════════════════════════════════════
+   Cheng Real Estates — External JavaScript
+   cheng-scripts.js
+   ═══════════════════════════════════════════════════ */
 
-<style>
-/* ── Reset ─────────────────────────────────────── */
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+/* ── Father's Day Pop-up ─────────────────────────── */
+
+/**
+ * Close the promo overlay and remove it from the tab order.
+ */
+function closePromo() {
+    const overlay = document.getElementById('promo-overlay');
+    if (!overlay) return;
+    overlay.style.transition = 'opacity 0.3s ease';
+    overlay.style.opacity = '0';
+    setTimeout(() => { overlay.style.display = 'none'; }, 300);
 }
 
-/* ── TASK 4: Rich body background with warm gold/teal palette ── */
-body{
-    font-family:'Segoe UI', Arial, sans-serif;
-    background: linear-gradient(160deg, #0f4c5c 0%, #1a7a8a 30%, #e8a020 70%, #f5c842 100%);
-    background-attachment: fixed;
-    color:#222;
-    line-height:1.6;
+// Show popup automatically after 1.2 s (gives the page time to paint)
+window.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+        const overlay = document.getElementById('promo-overlay');
+        if (overlay) {
+            overlay.style.display = 'flex';
+        }
+    }, 1200);
+
+    // Close on overlay background click
+    document.getElementById('promo-overlay').addEventListener('click', (e) => {
+        if (e.target === e.currentTarget) closePromo();
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closePromo();
+    });
+
+    // Wire close button
+    document.getElementById('promo-close').addEventListener('click', closePromo);
+
+    // Set minimum date on booking date input to today
+    const dateInput = document.getElementById('preferred-date');
+    if (dateInput) {
+        const today = new Date().toISOString().split('T')[0];
+        dateInput.setAttribute('min', today);
+    }
+});
+
+
+/* ── Appointment Booking Form ────────────────────── */
+
+/**
+ * Validate a single field.
+ * Returns true if valid, false if not (and shows an error message).
+ */
+function validateField(id, errorId, message) {
+    const el = document.getElementById(id);
+    const err = document.getElementById(errorId);
+    const value = el.value.trim();
+    let valid = true;
+
+    if (!value) {
+        err.textContent = message;
+        el.classList.add('invalid');
+        valid = false;
+    } else {
+        err.textContent = '';
+        el.classList.remove('invalid');
+    }
+    return valid;
 }
 
-html{
-    scroll-behavior:smooth;
+/**
+ * Extra validation for email format.
+ */
+function validateEmail() {
+    const el = document.getElementById('email');
+    const err = document.getElementById('err-email');
+    const value = el.value.trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!value) {
+        err.textContent = 'Email address is required.';
+        el.classList.add('invalid');
+        return false;
+    } else if (!emailRegex.test(value)) {
+        err.textContent = 'Please enter a valid email address.';
+        el.classList.add('invalid');
+        return false;
+    }
+    err.textContent = '';
+    el.classList.remove('invalid');
+    return true;
 }
 
-/* ── Header ──────────────────────────────────────── */
-header{
-    background: linear-gradient(90deg, #083344 0%, #0f4c5c 50%, #083344 100%);
-    color:white;
-    padding:28px 20px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:24px;
-    flex-wrap:wrap;
-    text-align:center;
-    border-bottom: 4px solid #e8a020;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+/**
+ * Run full form validation.
+ * Returns true only if all required fields pass.
+ */
+function validateForm() {
+    const nameOk    = validateField('full-name',   'err-name',        'Full name is required.');
+    const emailOk   = validateEmail();
+    const phoneOk   = validateField('phone',        'err-phone',       'Phone number is required.');
+    const natOk     = validateField('nationality',  'err-nationality', 'Nationality is required.');
+    const genderOk  = validateField('gender',       'err-gender',      'Please select a gender.');
+    return nameOk && emailOk && phoneOk && natOk && genderOk;
 }
 
-header h1{
-    font-size:2.2rem;
-    letter-spacing:1px;
-    color:#f5c842;
-    text-shadow: 1px 2px 6px rgba(0,0,0,0.4);
+/**
+ * Handle form submission (client-side demo — no server call).
+ */
+function submitBooking() {
+    if (!validateForm()) {
+        // Scroll to first invalid field
+        const firstInvalid = document.querySelector('.invalid');
+        if (firstInvalid) firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+    }
+
+    const name  = document.getElementById('full-name').value.trim();
+    const email = document.getElementById('email').value.trim();
+
+    // Show success message
+    document.getElementById('booking-form-container').style.display = 'none';
+    const success = document.getElementById('booking-success');
+    success.style.display = 'block';
+    document.getElementById('success-name').textContent  = name;
+    document.getElementById('success-email').textContent = email;
 }
 
-header p{
-    color:#b0dce8;
-    font-size:1rem;
-    margin-top:4px;
+/**
+ * Reset the form back to its initial state.
+ */
+function resetForm() {
+    const fields = ['full-name', 'email', 'phone', 'nationality', 'gender',
+                    'property-interest', 'preferred-date', 'notes'];
+    fields.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.value = '';
+    });
+
+    const errors = document.querySelectorAll('.field-error');
+    errors.forEach(e => { e.textContent = ''; });
+
+    const invalids = document.querySelectorAll('.invalid');
+    invalids.forEach(el => el.classList.remove('invalid'));
+
+    document.getElementById('booking-success').style.display       = 'none';
+    document.getElementById('booking-form-container').style.display = 'block';
 }
-
-.logo{
-    width:130px;
-    height:130px;
-    border-radius:50%;
-    border:4px solid #e8a020;
-    object-fit:cover;
-    box-shadow: 0 0 0 6px rgba(232,160,32,0.25);
-}
-
-/* ── TASK 1: Centred nav with rich background ────── */
-nav{
-    background: linear-gradient(90deg, #0a4a5a, #116677, #0a4a5a);
-    padding:0;
-    text-align:center;
-    border-bottom: 3px solid #e8a020;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 3px 12px rgba(0,0,0,0.25);
-}
-
-nav ul{
-    list-style:none;
-    margin:0;
-    padding:0;
-    display:flex;
-    justify-content:center;   /* ← centres the links */
-    align-items:center;
-    flex-wrap:wrap;
-    gap:0;
-}
-
-nav ul li a{
-    display:block;
-    color:white;
-    text-decoration:none;
-    font-weight:700;
-    font-size:0.95rem;
-    letter-spacing:0.5px;
-    padding:16px 22px;
-    text-transform:uppercase;
-    transition: background 0.25s, color 0.25s;
-    border-bottom: 3px solid transparent;
-}
-
-nav ul li a:hover{
-    color:#f5c842;
-    background: rgba(255,255,255,0.08);
-    border-bottom-color:#f5c842;
-}
-
-/* ── Main container ──────────────────────────────── */
-.container{
-    width:92%;
-    max-width:1150px;
-    margin:30px auto;
-    background:rgba(255,255,255,0.97);
-    padding:35px 30px;
-    border-radius:14px;
-    box-shadow:0 8px 40px rgba(0,0,0,0.2);
-    border-top: 5px solid #e8a020;
-}
-
-/* ── Section headings ────────────────────────────── */
-h2{
-    color:#0f4c5c;
-    margin-top:30px;
-    margin-bottom:12px;
-    font-size:1.6rem;
-    padding-bottom:8px;
-    border-bottom:2px solid #e8a020;
-    display:inline-block;
-}
-
-h3{
-    color:#116677;
-    margin-top:18px;
-    margin-bottom:8px;
-    font-size:1.1rem;
-}
-
-/* ── Hero ────────────────────────────────────────── */
-.hero{
-    text-align:center;
-    margin-bottom:30px;
-}
-
-.hero img{
-    width:100%;
-    max-height:500px;
-    object-fit:cover;
-    border-radius:12px;
-    box-shadow:0 4px 20px rgba(0,0,0,0.15);
-}
-
-/* ── Photo gallery ───────────────────────────────── */
-.gallery{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:20px;
-    margin-top:12px;
-}
-
-.gallery figure{
-    text-align:center;
-    border-radius:10px;
-    overflow:hidden;
-    box-shadow:0 2px 10px rgba(0,0,0,0.1);
-    background:#f8f8f8;
-}
-
-.gallery img{
-    width:100%;
-    height:240px;
-    object-fit:cover;
-    display:block;
-    transition:transform 0.3s ease;
-}
-
-.gallery img:hover{
-    transform:scale(1.04);
-}
-
-figcaption{
-    margin:10px;
-    font-weight:bold;
-    color:#0f4c5c;
-    font-size:0.9rem;
-}
-
-/* ── TASK 2: Full-width table with colours ────────── */
-#properties{
-    overflow-x:auto;
-}
-
-.property-table-wrap{
-    width:100%;
-    overflow-x:auto;
-    border-radius:10px;
-    box-shadow:0 4px 18px rgba(15,76,92,0.15);
-    margin-top:16px;
-}
-
-.property-table-wrap h3.tbl-heading{
-    background: linear-gradient(90deg, #0f4c5c, #1a7a8a);
-    color:#f5c842;
-    text-align:center;
-    font-size:1.25rem;
-    letter-spacing:1px;
-    padding:14px 20px;
-    margin:0;
-    border-radius:10px 10px 0 0;
-    text-transform:uppercase;
-}
-
-table{
-    width:100%;
-    border-collapse:collapse;
-    font-size:0.97rem;
-}
-
-/* Column header row */
-table thead tr{
-    background: linear-gradient(90deg,#083344,#0f4c5c);
-}
-
-table thead th{
-    color:#f5c842;
-    padding:14px 16px;
-    text-align:left;
-    font-size:1rem;
-    letter-spacing:0.4px;
-    border:none;
-}
-
-/* Alternating row colours */
-table tbody tr:nth-child(odd){
-    background:#e8f7fa;
-}
-
-table tbody tr:nth-child(even){
-    background:#cce8ef;
-}
-
-table tbody tr:hover{
-    background:#b8dce6;
-    transition:background 0.2s;
-}
-
-table tbody td{
-    padding:13px 16px;
-    border-bottom:1px solid #b0d4dc;
-    color:#1a3a44;
-}
-
-/* Status badge */
-table tbody td:last-child{
-    font-weight:bold;
-    color:#0a8c3e;
-}
-
-/* ── Audio / iframe ──────────────────────────────── */
-audio{
-    width:100%;
-    margin-top:10px;
-}
-
-iframe{
-    width:100%;
-    height:400px;
-    border:none;
-    border-radius:10px;
-    margin-top:10px;
-}
-
-/* ── Footer ──────────────────────────────────────── */
-footer{
-    background: linear-gradient(90deg, #083344, #0f4c5c, #083344);
-    color:#b0dce8;
-    text-align:center;
-    padding:20px;
-    margin-top:0;
-    border-top:4px solid #e8a020;
-    font-size:0.95rem;
-}
-
-/* ── Lists ───────────────────────────────────────── */
-ul, ol{
-    margin-left:25px;
-    margin-bottom:15px;
-}
-
-ul ul{
-    list-style-type:circle;
-}
-
-ul ul ul{
-    list-style-type:square;
-}
-
-/* ── TASK 3: Media grid — min 2 rows × 2 columns ─── */
-.media-grid{
-    display:grid;
-    grid-template-columns: repeat(2, 1fr); /* 2 columns */
-    grid-auto-rows: 280px;                 /* each row 280px, auto-adds rows */
-    gap:18px;
-    margin-top:16px;
-}
-
-.media-grid img,
-.media-grid iframe{
-    width:100%;
-    height:100%;
-    border-radius:10px;
-    object-fit:cover;
-    box-shadow:0 3px 12px rgba(0,0,0,0.12);
-    border:2px solid #cce8ef;
-}
-
-/* ── Contact links ───────────────────────────────── */
-#contact a{
-    color:#0f4c5c;
-    font-weight:bold;
-}
-
-#contact p{
-    margin-bottom:8px;
-}
-</style>
-</head>
-
-<body>
-
-<!-- ── Header ─────────────────────────────────────── -->
-<header>
-    <a href="#home">
-        <img src="https://images.unsplash.com/photo-1565953554309-d181306db7d5?w=200&h=200&fit=crop"
-             alt="Cheng Real Estates Logo" class="logo">
-    </a>
-    <div>
-        <h1 id="home">Cheng Real Estates</h1>
-        <p>Your Trusted Partner in Buying, Selling and Renting Property</p>
-    </div>
-</header>
-
-<!-- ── TASK 1: Centred navigation with styled background ── -->
-<nav>
-    <ul>
-        <li><a href="#about">About</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#properties">Properties</a></li>
-        <li><a href="#gallery">Gallery</a></li>
-        <li><a href="#media">Media</a></li>
-        <li><a href="#media-gallery">Gallery Grid</a></li>
-        <li><a href="#contact">Contact</a></li>
-    </ul>
-</nav>
-
-<div class="container">
-
-    <!-- ── Hero ──────────────────────────────────── -->
-    <section class="hero">
-        <h2>Featured Property</h2>
-        <a href="#gallery">
-            <img src="https://images.unsplash.com/photo-1651151084802-867d6a55dd25?w=1200&h=600&fit=crop"
-                 fetchpriority="high"
-                 alt="Featured Cheng Real Estates Property in Nairobi, Kenya">
-        </a>
-    </section>
-
-    <!-- ── About ─────────────────────────────────── -->
-    <section id="about">
-        <h2>About Us</h2>
-        <p>
-            Cheng Real Estates is committed to helping clients find
-            quality residential and commercial properties throughout Kenya.
-            We provide professional real estate services built on trust,
-            transparency and customer satisfaction.
-        </p>
-    </section>
-
-    <!-- ── Services ──────────────────────────────── -->
-    <section id="services">
-
-        <h2>Our Services</h2>
-
-        <h3>Services Offered</h3>
-        <ul>
-            <li>Property Sales</li>
-            <li>Property Rentals</li>
-            <li>Property Management</li>
-            <li>Real Estate Investment Advice</li>
-        </ul>
-
-        <h3>Property Buying Process</h3>
-        <ol>
-            <li>Browse Available Properties</li>
-            <li>Book a Property Viewing</li>
-            <li>Negotiate the Purchase Price</li>
-            <li>Sign Legal Agreements</li>
-            <li>Transfer Ownership</li>
-        </ol>
-
-        <h3>Property Categories</h3>
-        <ul>
-            <li>Residential
-                <ul>
-                    <li>Villas
-                        <ul>
-                            <li>Luxury Villas</li>
-                            <li>Family Villas</li>
-                        </ul>
-                    </li>
-                    <li>Apartments
-                        <ul>
-                            <li>Studio Apartments</li>
-                            <li>2 Bedroom Apartments</li>
-                            <li>Penthouses</li>
-                        </ul>
-                    </li>
-                    <li>Townhouses
-                        <ul>
-                            <li>Gated Community Townhouses</li>
-                            <li>Standalone Townhouses</li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-            <li>Commercial
-                <ul>
-                    <li>Office Space
-                        <ul>
-                            <li>Executive Offices</li>
-                            <li>Shared Workspaces</li>
-                        </ul>
-                    </li>
-                    <li>Retail Shops
-                        <ul>
-                            <li>Mall Shops</li>
-                            <li>Street Shops</li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-
-    </section>
-
-    <!-- ── TASK 2: Full-page table with heading, bg colour, row/column colours ── -->
-    <section id="properties">
-
-        <h2>Available Properties</h2>
-
-        <div class="property-table-wrap">
-            <!-- Table heading inside the styled wrapper -->
-            <h3 class="tbl-heading">Cheng Real Estates — Property Catalogue</h3>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th scope="col">Property</th>
-                        <th scope="col">Location</th>
-                        <th scope="col">Price (KES)</th>
-                        <th scope="col">Bedrooms</th>
-                        <th scope="col">Type</th>
-                        <th scope="col">Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>5 Bedroom Mansion</td>
-                        <td>Runda, Nairobi</td>
-                        <td>85,000,000</td>
-                        <td>5</td>
-                        <td>Residential</td>
-                        <td>Available</td>
-                    </tr>
-                    <tr>
-                        <td>2 Bedroom Apartment</td>
-                        <td>Kilimani, Nairobi</td>
-                        <td>9,500,000</td>
-                        <td>2</td>
-                        <td>Residential</td>
-                        <td>Available</td>
-                    </tr>
-                    <tr>
-                        <td>Commercial Plot</td>
-                        <td>Mombasa Road</td>
-                        <td>25,000,000</td>
-                        <td>N/A</td>
-                        <td>Commercial</td>
-                        <td>Available</td>
-                    </tr>
-                    <tr>
-                        <td>Holiday Cottage</td>
-                        <td>Naivasha</td>
-                        <td>14,500,000</td>
-                        <td>3</td>
-                        <td>Residential</td>
-                        <td>Available</td>
-                    </tr>
-                    <tr>
-                        <td>4 Bedroom Maisonette</td>
-                        <td>Kitengela</td>
-                        <td>12,000,000</td>
-                        <td>4</td>
-                        <td>Residential</td>
-                        <td>Available</td>
-                    </tr>
-                    <tr>
-                        <td>Executive Office Suite</td>
-                        <td>Upper Hill, Nairobi</td>
-                        <td>18,000,000</td>
-                        <td>N/A</td>
-                        <td>Commercial</td>
-                        <td>Available</td>
-                    </tr>
-                    <tr>
-                        <td>Studio Apartment</td>
-                        <td>Westlands, Nairobi</td>
-                        <td>6,200,000</td>
-                        <td>1</td>
-                        <td>Residential</td>
-                        <td>Available</td>
-                    </tr>
-                    <tr>
-                        <td>Retail Mall Shop</td>
-                        <td>Mombasa CBD</td>
-                        <td>11,000,000</td>
-                        <td>N/A</td>
-                        <td>Commercial</td>
-                        <td>Available</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-    </section>
-
-    <!-- ── Gallery ───────────────────────────────── -->
-    <section id="gallery">
-
-        <h2>Property Gallery</h2>
-
-        <div class="gallery">
-
-            <figure>
-                <img src="https://images.unsplash.com/photo-1565953554309-d181306db7d5?w=600&h=400&fit=crop"
-                     loading="lazy"
-                     alt="The Alma residential development, Nairobi">
-                <figcaption>Modern Property Development</figcaption>
-            </figure>
-
-            <figure>
-                <img src="https://images.unsplash.com/photo-1651151084802-867d6a55dd25?w=600&h=400&fit=crop"
-                     loading="lazy"
-                     alt="Luxury apartment building, Nairobi">
-                <figcaption>Luxury Residential Property</figcaption>
-            </figure>
-
-            <figure>
-                <img src="https://images.unsplash.com/photo-1585523658894-cc78fc2c8f67?w=600&h=400&fit=crop"
-                     loading="lazy"
-                     alt="Nairobi property surrounded by greenery">
-                <figcaption>Premium Living Spaces</figcaption>
-            </figure>
-
-            <figure>
-                <img src="https://images.unsplash.com/photo-1630880150559-25a87a27d81d?w=600&h=400&fit=crop"
-                     loading="lazy"
-                     alt="Modern commercial building, Nairobi">
-                <figcaption>Quality Housing Investment</figcaption>
-            </figure>
-
-        </div>
-
-    </section>
-
-    <!-- ── Media ─────────────────────────────────── -->
-    <section id="media">
-
-        <h2>Company Introduction Audio</h2>
-
-        <audio controls onerror="this.style.display='none'; document.getElementById('audio-fallback').style.display='block'">
-            <source src="https://scottholmesmusic.com/wp-content/uploads/edd/2021/09/Real-Estate.mp3" type="audio/mpeg">
-            Your browser does not support audio.
-        </audio>
-        <p id="audio-fallback" style="display:none; margin-top:8px;">
-            <a href="https://scottholmesmusic.com/wp-content/uploads/edd/2021/09/Real-Estate.mp3">Download audio</a>
-        </p>
-        <p style="font-size:12px; color:#888; margin-top:6px;">
-            Music: "Real Estate" by <a href="https://scottholmesmusic.com" target="_blank">Scott Holmes Music</a> — CC BY-NC licence
-        </p>
-
-        <h2 style="margin-top:20px;">Featured Video</h2>
-
-        <iframe
-            src="https://www.youtube.com/embed/bQXuobswD6s"
-            title="Real Estate Video"
-            loading="lazy"
-            allowfullscreen>
-        </iframe>
-
-        <h2 style="margin-top:20px;">Our Location</h2>
-
-        <iframe
-            src="https://maps.google.com/maps?q=Quincy+Mall+Nairobi+Kenya&output=embed"
-            title="Cheng Real Estates location — Quincy Mall, Nairobi, Kenya"
-            loading="lazy">
-        </iframe>
-
-    </section>
-
-    <!-- ── TASK 3: Images & Videos grid — 2 rows × 2 columns ── -->
-    <section id="media-gallery">
-
-        <h2> Videos Gallery</h2>
-
-        <div class="media-grid">
-
-            <!-- Row 1, Col 1 -->
-            <iframe
-                src="https://www.youtube.com/embed/bQXuobswD6s"
-                title="Property Video 1"
-                loading="lazy"
-                allowfullscreen>
-            </iframe>
-            <!-- Row 1, Col 2 -->
-             <iframe
-                src="https://www.youtube.com/embed/v7-NdbT73Vw"
-                title="Property Video 2"
-                loading="lazy"
-                allowfullscreen>
-            </iframe>
-
-        </div>
-
-    </section>
-
-    <!-- ── Contact ───────────────────────────────── -->
-    <section id="contact">
-
-        <h2>Contact Us</h2>
-
-        <p>Email: <a href="mailto:info@chengrealestates.com">info@chengrealestates.com</a></p>
-        <p>Phone: <a href="tel:+254794693395">+254 794 693 395</a></p>
-
-        <p>
-            Visit our partner website:
-            <a href="https://www.property24.co.ke" target="_blank">Property24 Kenya</a>
-        </p>
-
-    </section>
-
-</div><!-- end .container -->
-
-<footer>
-    <p>&copy; 2026 Cheng Real Estates. All Rights Reserved.</p>
-</footer>
-
-</body>
-</html>
