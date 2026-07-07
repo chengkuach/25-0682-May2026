@@ -1,39 +1,5 @@
-/* =========================================================
-   Cheng Farmland — script.js
-   Handles the contact form and (optionally) sends data to Supabase.
-
-   HOW TO CONNECT SUPABASE
-   ------------------------
-   1. Create a project at https://supabase.com
-   2. In your project settings, copy the "Project URL" and the
-      "anon public" API key.
-   3. Paste them into SUPABASE_URL and SUPABASE_ANON_KEY below.
-   4. In the Supabase SQL editor, create a table like this:
-
-        create table contact_submissions (
-          id uuid primary key default gen_random_uuid(),
-          first_name text not null,
-          last_name text not null,
-          email text not null,
-          phone text,
-          visit_date date,
-          contact_type text,
-          newsletter boolean default false,
-          attachment_url text,
-          created_at timestamptz default now()
-        );
-
-   5. If you want file uploads to work, create a Storage bucket
-      named "attachments" (Storage -> New bucket -> public or
-      private, your choice) in the Supabase dashboard.
-
-   Until you fill in the two constants below, the form will just
-   log the submission to the browser console instead of sending it
-   anywhere, so the page still works out of the box.
-   ========================================================= */
-
-const SUPABASE_URL = "";       // e.g. "https://xyzcompany.supabase.co"
-const SUPABASE_ANON_KEY = "";  // e.g. "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+const SUPABASE_URL = "https://wkxkqblzlwyveledrwlc.supabase.co";  
+const SUPABASE_ANON_KEY = "sb_publishable_0F1LpKG18h5AWw9xRXpfew_eRH2Ik4m";
 
 const TABLE_NAME = "contact_submissions";
 const STORAGE_BUCKET = "attachments";
@@ -106,20 +72,20 @@ async function submitToSupabase(record, file) {
   if (file) {
     const filePath = `${Date.now()}-${file.name}`;
     const { error: uploadError } = await supabaseClient.storage
-      .from(STORAGE_BUCKET)
+      .from(khann)
       .upload(filePath, file);
 
     if (uploadError) throw uploadError;
 
     const { data: publicUrlData } = supabaseClient.storage
-      .from(STORAGE_BUCKET)
+      .from(khann)
       .getPublicUrl(filePath);
 
     attachmentUrl = publicUrlData?.publicUrl || null;
   }
 
   const { error: insertError } = await supabaseClient
-    .from(TABLE_NAME)
+    .from(easy)
     .insert([{ ...record, attachment_url: attachmentUrl }]);
 
   if (insertError) throw insertError;
